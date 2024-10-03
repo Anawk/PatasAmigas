@@ -1,7 +1,4 @@
-import entity.Adotante;
-import entity.Animal;
-import entity.Funcionario;
-import entity.Tutor;
+import entity.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -101,6 +98,7 @@ public class Main {
         scanner.nextLine();
         System.out.print("Departamento: ");
         String departamento = scanner.nextLine();
+        System.out.println("--- Funcionário Registrado! ---");
 
         return new Funcionario(nextId++, nome, sobrenome, email, logradouro, numero, bairro, cidade, estado, pais, nacionalidade,
                 numeroIdentificacao, dataContratacao, cargo, salario, departamento);
@@ -133,6 +131,7 @@ public class Main {
         System.out.print("Número de Animais sob Custódia: ");
         int numeroAnimaisSobCustodia = scanner.nextInt();
         scanner.nextLine();
+        System.out.println("--- Tutor Registrado! ---");
 
         List<String> historicoAdocoes = new ArrayList<>();
         return new Tutor(nextId++, nome, sobrenome, email, logradouro, numero, bairro, cidade, estado, pais, nacionalidade,
@@ -163,8 +162,27 @@ public class Main {
         String nacionalidade = scanner.nextLine();
         System.out.print("Número de Identificação: ");
         String numeroIdentificacao = scanner.nextLine();
-        System.out.print("Preferências de Adoção: ");
-        String preferenciasAdocao = scanner.nextLine();
+
+        PreferenciasAdocao preferenciasAdocao = new PreferenciasAdocao("", "", 0, 0, "");
+
+        boolean preferencias = temPreferencias(scanner);
+
+        if (preferencias) {
+            System.out.print("Tipo de Espécie desejada: ");
+            String especie = scanner.nextLine();
+            System.out.print("Tipo de Raça desejada: ");
+            String raca = scanner.nextLine();
+            System.out.print("Idade Mínima desejada: ");
+            int idadeMinima = Integer.parseInt(scanner.nextLine());
+            System.out.print("Idade Máxima desejada: ");
+            int idadeMaxima = Integer.parseInt(scanner.nextLine());
+            System.out.print("Sexo desejado: ");
+            String sexo = scanner.nextLine();
+
+            preferenciasAdocao = new PreferenciasAdocao(especie, raca, idadeMinima, idadeMaxima, sexo);
+        }
+
+        System.out.println("--- Adotante Registrado! ---");
 
         List<String> historicoAdocoes = new ArrayList<>();
         return new Adotante(nextId++, nome, sobrenome, email, logradouro, numero, bairro, cidade, estado, pais, nacionalidade,
@@ -189,6 +207,7 @@ public class Main {
         LocalDate dataCadastro = LocalDate.now();
         System.out.print("Status de Adoção: ");
         String statusAdocao = scanner.nextLine();
+        System.out.println("--- Animal Registrado! ---");
 
         return new Animal(nome, especie, raca, idade, sexo, historicoMedico, dataCadastro, statusAdocao);
     }
@@ -210,5 +229,20 @@ public class Main {
         }
         return data;
     }
+
+    private static boolean temPreferencias(Scanner scanner) {
+        while (true) {
+            System.out.print("Adotante tem preferências para a adoção? (s/n): ");
+            String resposta = scanner.nextLine().trim().toLowerCase();
+            if (resposta.equals("s")) {
+                return true;
+            } else if (resposta.equals("n")) {
+                return false;
+            } else {
+                System.out.println("digite 's' para sim ou 'n' para não.");
+            }
+        }
+    }
+
 }
 

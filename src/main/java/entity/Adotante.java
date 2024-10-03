@@ -6,26 +6,23 @@ import java.util.Objects;
 
 public class Adotante extends Pessoa {
     private String numeroIdentificacao;
-    private String preferenciasAdocao;
+    private PreferenciasAdocao preferenciasAdocao;
     private List<String> historicoAdocoes;
-
 
     public Adotante() {
         super(0, "", "", "", "", "", "", "", "", "", "");
         this.numeroIdentificacao = "";
-        this.preferenciasAdocao = "";
+        this.preferenciasAdocao = new PreferenciasAdocao("", "", 0, 0, "");
         this.historicoAdocoes = new ArrayList<>();
     }
 
-
     public Adotante(int idPessoa, String nome, String sobrenome, String email, String logradouro, String numero, String bairro, String cidade, String estado, String pais, String nacionalidade,
-                    String numeroIdentificacao, String preferenciasAdocao, List<String> historicoAdocoes) {
+                    String numeroIdentificacao, PreferenciasAdocao preferenciasAdocao, List<String> historicoAdocoes) {
         super(idPessoa, nome, sobrenome, email, logradouro, numero, bairro, cidade, estado, pais, nacionalidade);
         this.numeroIdentificacao = numeroIdentificacao;
         this.preferenciasAdocao = preferenciasAdocao;
-        this.historicoAdocoes = historicoAdocoes != null ? historicoAdocoes : new ArrayList<String>();
+        this.historicoAdocoes = historicoAdocoes != null ? historicoAdocoes : new ArrayList<>();
     }
-
 
     public String getNumeroIdentificacao() {
         return numeroIdentificacao;
@@ -35,11 +32,11 @@ public class Adotante extends Pessoa {
         this.numeroIdentificacao = numeroIdentificacao;
     }
 
-    public String getPreferenciasAdocao() {
+    public PreferenciasAdocao getPreferenciasAdocao() {
         return preferenciasAdocao;
     }
 
-    public void setPreferenciasAdocao(String preferenciasAdocao) {
+    public void setPreferenciasAdocao(PreferenciasAdocao preferenciasAdocao) {
         this.preferenciasAdocao = preferenciasAdocao;
     }
 
@@ -48,12 +45,15 @@ public class Adotante extends Pessoa {
     }
 
     public void setHistoricoAdocoes(List<String> historicoAdocoes) {
-        this.historicoAdocoes = historicoAdocoes != null ? historicoAdocoes : new ArrayList<String>();
+        this.historicoAdocoes = historicoAdocoes != null ? historicoAdocoes : new ArrayList<>();
     }
 
     @Override
     public String toString() {
-        return super.toString() + ", \"numeroIdentificacao\":\"" + numeroIdentificacao + "\", \"preferenciasAdocao\":\"" + preferenciasAdocao + "\", \"historicoAdocoes\":" + historicoAdocoes;
+        return super.toString() +
+                ", \"numeroIdentificacao\":\"" + numeroIdentificacao +
+                "\", \"preferenciasAdocao\":" + preferenciasAdocao +
+                ", \"historicoAdocoes\":" + historicoAdocoes;
     }
 
     @Override
@@ -62,7 +62,9 @@ public class Adotante extends Pessoa {
         if (!(o instanceof Adotante)) return false;
         if (!super.equals(o)) return false;
         Adotante adotante = (Adotante) o;
-        return Objects.equals(numeroIdentificacao, adotante.numeroIdentificacao) && Objects.equals(preferenciasAdocao, adotante.preferenciasAdocao) && Objects.equals(historicoAdocoes, adotante.historicoAdocoes);
+        return Objects.equals(numeroIdentificacao, adotante.numeroIdentificacao) &&
+                Objects.equals(preferenciasAdocao, adotante.preferenciasAdocao) &&
+                Objects.equals(historicoAdocoes, adotante.historicoAdocoes);
     }
 
     @Override
@@ -70,4 +72,3 @@ public class Adotante extends Pessoa {
         return Objects.hash(super.hashCode(), numeroIdentificacao, preferenciasAdocao, historicoAdocoes);
     }
 }
-
