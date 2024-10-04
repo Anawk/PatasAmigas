@@ -29,8 +29,12 @@ public class Main {
             System.out.println("1. Registrar novo funcionário");
             System.out.println("2. Registrar novo tutor");
             System.out.println("3. Registrar novo adotante");
-            System.out.println("4. Cadastrar novo animal");
-            System.out.println("5. Sair");
+            System.out.println("4. Registrar novo animal");
+            System.out.println("5. Listar funcionários");
+            System.out.println("6. Listar tutores");
+            System.out.println("7. Listar adotantes");
+            System.out.println("8. Listar animais");
+            System.out.println("9. Sair");
             //adicionar no menu a listagem de itens em formato de tabela/ edição de informações de itens/
             // busca de itens com filtro/ editar perfil / soft delete / listar animais por caracteristicas
 
@@ -45,6 +49,7 @@ public class Main {
                 case 2:
                     Tutor tutor = criarTutor(scanner);
                     tutores.add(tutor);
+                    System.out.println(tutores);
                     break;
                 case 3:
                     Adotante adotante = criarAdotante(scanner);
@@ -55,6 +60,18 @@ public class Main {
                     animais.add(animal);
                     break;
                 case 5:
+                    listarfuncionarios(funcionarios);
+                    break;
+                case 6: 
+                    listartutores(tutores);
+                    break;
+                case 7:
+                    listaradotantes(adotantes);
+                    break;
+                case 8:
+                    listaranimais(animais);
+                    break;
+                case 9:
                     continua = false;
                     System.out.println("Sistema fechado!");
                     break;
@@ -244,5 +261,72 @@ public class Main {
         }
     }
 
+    private static void listarfuncionarios(List<Funcionario> funcionarios){
+        int size = funcionarios.size();
+        System.out.println("Lista de Funcionários: ");
+        System.out.println(size);// tamanho da lista
+        System.out.println(funcionarios.isEmpty()); //true = lista vazia | false = lista com funcionarios
+        int indice = 1;
+        if (funcionarios.isEmpty()) {
+            System.out.println("Sem funcionários cadastrados!");
+        }else{
+        for(int i = 0; i < size; i++){
+            System.out.printf("Funcionário " + indice +  " | Nome: " +  funcionarios.get(i).getNome() + " Sobrenome: " + funcionarios.get(i).getSobrenome()
+            + " Número de identificação: " + funcionarios.get(i).getNumeroIdentificacaoFuncionario() + " Cargo: " + funcionarios.get(i).getCargo() + "\n");
+            indice++;
+        }
+    }
+    }
+
+    private static void listartutores(List<Tutor> tutores){
+        int size = tutores.size();
+        System.out.println("Lista de Tutores: ");
+        System.out.println(size);// tamanho da lista
+        System.out.println(tutores.isEmpty()); //true = lista vazia | false = lista com funcionarios
+        int indice = 1;
+        if (tutores.isEmpty()) {
+            System.out.println("Sem tutores cadastrados!");
+        }else{
+        for(int i = 0; i < size; i++){
+            System.out.printf("Tutor " + indice +  " | Nome: " +  tutores.get(i).getNome() + " Sobrenome: " + tutores.get(i).getSobrenome() + 
+             " E-mail: " + tutores.get(i).getEmail() +  " Endereço: " + tutores.get(i).getLogradouro() + "\n");
+            indice++;
+        }
+    }
+    }
+
+    private static void listaradotantes(List<Adotante> adotantes){
+        int size = adotantes.size();
+        System.out.println("Lista de Adotantes: ");
+        System.out.println(size);// tamanho da lista
+        System.out.println(adotantes.isEmpty()); //true = lista vazia | false = lista com funcionarios
+        int indice = 1;
+        if (adotantes.isEmpty()) {
+            System.out.println("Sem adotantes cadastrados!");
+        }else{
+        for(int i = 0; i < size; i++){
+            System.out.printf("Adotante " + indice +  " | Nome: " +  adotantes.get(i).getNome() + " Sobrenome: " + adotantes.get(i).getSobrenome() +
+             " E-mail: " + adotantes.get(i).getEmail() + " Endereço: " + adotantes.get(i).getLogradouro() + " Preferências: " + adotantes.get(i).getPreferenciasAdocao() + "\n");
+            indice++;
+        }
+    }
+    }
+
+    private static void listaranimais(List<Animal> animais){
+        int size = animais.size();
+        System.out.println("Lista de Animais: ");
+        System.out.println(size);// tamanho da lista
+        System.out.println(animais.isEmpty()); //true = lista vazia | false = lista com funcionarios
+        int indice = 1;
+        if (animais.isEmpty()) {
+            System.out.println("Sem animais cadastrados!");
+        }else{
+        for(int i = 0; i < size; i++){
+            System.out.printf("Animal " + indice +  " | Nome: " +  animais.get(i).getNome() + " Raça: " + animais.get(i).getRaca() +
+             " Espécie: " + animais.get(i).getEspecie() + " Idade: " + animais.get(i).getIdade() + " Histórico: " + animais.get(i).getHistoricoMedico() + "\n");
+            indice++;
+        }
+    }
+    }
 }
 
