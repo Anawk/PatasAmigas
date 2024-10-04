@@ -2,6 +2,8 @@ package entity;
 
 import java.time.LocalDate;
 import java.util.Objects;
+import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2.Argon2Factory;
 
 public class Pessoa {
     private int idPessoa;
@@ -18,7 +20,9 @@ public class Pessoa {
     private String cpf;
     private String genero;
     private LocalDate dataNascimento;
-    private String senha;
+    private String senhaHash;
+    private static final Argon2 argon2 = Argon2Factory.create();
+
 
     public Pessoa(int idPessoa, String nome, String sobrenome, String email, String logradouro, String numero, String bairro, String cidade, String estado, String pais, String nacionalidade) {}
 
@@ -39,7 +43,7 @@ public class Pessoa {
         this.cpf = cpf;
         this.genero = genero;
         this.dataNascimento = dataNascimento;
-        this.senha = senha;
+        setSenha(senha);
     }
 
 
@@ -155,13 +159,18 @@ public class Pessoa {
         this.dataNascimento = dataNascimento;
     }
 
-    public String getSenha() {
-        return senha;
+    public void setSenha(String senha) {
+        this.senhaHash = hashSenha(senha);
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public boolean verificarSenha(String senha) {
+        return argon2.verify(this.senhaHash, senha);
     }
+
+    private String hashSenha(String senha) {
+        return argon2.hash(2, 15 * 1024, 1, senha);
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -194,7 +203,7 @@ public class Pessoa {
                 + "\"cpf\":\"" + cpf + "\","
                 + "\"genero\":\"" + genero + "\","
                 + "\"dataNascimento\":\"" + dataNascimento + "\","
-                + "\"senha\":\"" + senha + "\""
+                + "\"senhaHash\":\"" + senhaHash + "\""
                 + "}";
     }
 }
