@@ -8,7 +8,6 @@
 
 # **Patas Amigas**
 
-Projeto LP2 - **Patas Amigas**
 Este é um projeto desenvolvido para a disciplina de LP2 (Linguagem de Programação 2), no qual aplicamos conhecimentos em desenvolvimento <a href="https://www.java.com/en/download/help/whatis_java.html" target="_blank">Java</a>.
 
 ## **🔖 Descrição do Projeto**
