@@ -11,26 +11,35 @@ public class Animal {
     private String historicoMedico;
     private LocalDate dataCadastro;
     private String statusAdocao;
-
+    private static int contadorId = 0; 
+    private int id;
 
     public Animal(String nome, String especie, String raca, int idade, String sexo,
                   String historicoMedico, LocalDate dataCadastro, String statusAdocao) {
-        this.nome = nome;
+        setNome(nome); 
         this.especie = especie;
         this.raca = raca;
-        this.idade = idade;
+        setIdade(idade); 
         this.sexo = sexo;
         this.historicoMedico = historicoMedico;
         this.dataCadastro = dataCadastro;
         this.statusAdocao = statusAdocao;
+        this.id = contadorId++; 
     }
 
+    // Métodos getters e setters
+    public int getId() {
+        return id;
+    }
 
     public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
+        if (nome == null || nome.trim().isEmpty()) {
+            throw new IllegalArgumentException("O nome não pode estar vazio.");
+        }
         this.nome = nome;
     }
 
@@ -55,6 +64,9 @@ public class Animal {
     }
 
     public void setIdade(int idade) {
+        if (idade < 0) {
+            throw new IllegalArgumentException("A idade não pode ser negativa.");
+        }
         this.idade = idade;
     }
 
@@ -89,5 +101,12 @@ public class Animal {
     public void setStatusAdocao(String statusAdocao) {
         this.statusAdocao = statusAdocao;
     }
-}
 
+    @Override
+    public String toString() {
+        return "ID: " + id + ", Nome: " + nome + ", Espécie: " + especie +
+                ", Raça: " + raca + ", Idade: " + idade + ", Sexo: " + sexo +
+                ", Histórico Médico: " + historicoMedico + ", Data de Cadastro: " + dataCadastro +
+                ", Status de Adoção: " + statusAdocao;
+    }
+}

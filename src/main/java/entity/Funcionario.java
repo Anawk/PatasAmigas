@@ -4,34 +4,35 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Funcionario extends Pessoa {
+
+    private static int contadorId = 0;
     private String numeroIdentificacaoFuncionario;
     private LocalDate dataContratacao;
     private String cargo;
     private double salario;
     private String departamento;
+    private int idFuncionario;  
 
-
-    public Funcionario(int i, String nome, String sobrenome, String email, String logradouro, String numero, String bairro, String cidade, String estado, String pais, String nacionalidade, String numeroIdentificacao, LocalDate dataContratacao, String cargo, double salario, String departamento) {
-        super(0, "", "", "", "", "", "", "", "", "", "", "", "", LocalDate.now(), "");
-        this.numeroIdentificacaoFuncionario = "";
-        this.dataContratacao = LocalDate.now();
-        this.cargo = "";
-        this.salario = 0.0;
-        this.departamento = "";
-    }
-
-
-    public Funcionario(int idPessoa, String nome, String sobrenome, String email, String logradouro, String numero, String bairro, String cidade, String estado, String pais, String nacionalidade,
-                       String cpf, String genero, LocalDate dataNascimento, String senha,
-                       String numeroIdentificacaoFuncionario, LocalDate dataContratacao, String cargo, double salario, String departamento) {
-        super(idPessoa, nome, sobrenome, email, logradouro, numero, bairro, cidade, estado, pais, nacionalidade, cpf, genero, dataNascimento, senha);
-        this.numeroIdentificacaoFuncionario = numeroIdentificacaoFuncionario;
+    public Funcionario(String nome, String sobrenome, String email, String logradouro, String numero, String bairro,
+                       String cidade, String estado, String pais, String nacionalidade, String cpf, String genero,
+                       LocalDate dataNascimento, String senha, LocalDate dataContratacao, String cargo,
+                       double salario, String departamento) {
+        super(0, nome, sobrenome, email, logradouro, numero, bairro, cidade, estado, pais, nacionalidade, cpf, genero, dataNascimento, senha);
+        this.idFuncionario = contadorId++;
+        this.numeroIdentificacaoFuncionario = gerarNumeroIdentificacao(); 
         this.dataContratacao = dataContratacao;
         this.cargo = cargo;
         this.salario = salario;
         this.departamento = departamento;
     }
 
+    private String gerarNumeroIdentificacao() {
+        return "FUNC-" + idFuncionario; 
+    }
+
+    public int getIdFuncionario() {
+        return idFuncionario;
+    }
 
     public String getNumeroIdentificacaoFuncionario() {
         return numeroIdentificacaoFuncionario;
@@ -73,13 +74,11 @@ public class Funcionario extends Pessoa {
         this.departamento = departamento;
     }
 
-
     @Override
     public String toString() {
-        return super.toString() + ", \"numeroIdentificacaoFuncionario\":\"" + numeroIdentificacaoFuncionario + "\", \"dataContratacao\":\"" + dataContratacao + "\", \"cargo\":\"" + cargo
-                + "\", \"salario\":" + salario + ", \"departamento\":\"" + departamento + "\"";
+        return super.toString() + ", \"ID Funcionario\":\"" + idFuncionario + "\", \"numeroIdentificacaoFuncionario\":\"" + numeroIdentificacaoFuncionario + "\", \"dataContratacao\":\"" + dataContratacao
+                + "\", \"cargo\":\"" + cargo + "\", \"salario\":" + salario + ", \"departamento\":\"" + departamento + "\"";
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -99,4 +98,3 @@ public class Funcionario extends Pessoa {
         return Objects.hash(super.hashCode(), numeroIdentificacaoFuncionario, dataContratacao, cargo, salario, departamento);
     }
 }
-
