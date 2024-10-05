@@ -88,7 +88,7 @@ Contribuições são bem-vindas! Se você tiver sugestões ou melhorias, sinta-s
 ---
 
 <div align="center"><br>
-  🐾 Obrigado por visitar o repositório Patas Amigas! 🐾
+  🐾 Obrigado por visitar o repositório PatasAmigas! 🐾
 </div><br>
 
 ---
