@@ -180,21 +180,38 @@ public class Main {
         System.out.print("Número de Identificação: ");
         String numeroIdentificacao = scanner.nextLine();
 
-        PreferenciasAdocao preferenciasAdocao = new PreferenciasAdocao("", "", 0, 0, "");
+        PreferenciasAdocao preferenciasAdocao = new PreferenciasAdocao("N", "N", 0, 0, "N");
 
         boolean preferencias = temPreferencias(scanner);
 
         if (preferencias) {
-            System.out.print("Tipo de Espécie desejada: ");
-            String especie = scanner.nextLine();
-            System.out.print("Tipo de Raça desejada: ");
-            String raca = scanner.nextLine();
-            System.out.print("Idade Mínima desejada: ");
-            int idadeMinima = Integer.parseInt(scanner.nextLine());
-            System.out.print("Idade Máxima desejada: ");
-            int idadeMaxima = Integer.parseInt(scanner.nextLine());
-            System.out.print("Sexo desejado: ");
-            String sexo = scanner.nextLine();
+            String especie = perguntarPref(scanner, "Tipo de Espécie");
+
+            String raca = perguntarPref(scanner, "Tipo de Raça");
+
+            System.out.print("Idade Minima (Digite 'S' para especificar ou 'N' se não tiver preferência): ");
+            String resposta = scanner.nextLine().toUpperCase();
+            int idadeMinima;
+            if (resposta.equals("S")) {
+                System.out.print("Especifique: ");
+                String idadeMinimaDigitada = scanner.nextLine();
+                idadeMinima = idadeMinimaDigitada.isEmpty() ? 0 : Integer.parseInt(idadeMinimaDigitada); //se ele disser que não tem preferencia, preenche com 0
+            } else {
+                idadeMinima = 0;
+            }
+
+            System.out.print("Idade Maxima (Digite 'S' para especificar ou 'N' se não tiver preferência): ");
+            String resposta2 = scanner.nextLine().toUpperCase();
+            int idadeMaxima;
+            if (resposta2.equals("S")) {
+                System.out.print("Especifique: ");
+                String idadeMaximaDigitada = scanner.nextLine();
+                idadeMaxima = idadeMaximaDigitada.isEmpty() ? 0 : Integer.parseInt(idadeMaximaDigitada); //se ele disser que não tem preferencia, preenche com 0
+            } else {
+                idadeMaxima = 0;
+            }
+
+            String sexo = perguntarPref(scanner, "Sexo");
 
             preferenciasAdocao = new PreferenciasAdocao(especie, raca, idadeMinima, idadeMaxima, sexo);
         }
@@ -258,6 +275,18 @@ public class Main {
             } else {
                 System.out.println("digite 's' para sim ou 'n' para não.");
             }
+        }
+    }
+
+    private static String perguntarPref(Scanner scanner, String pergunta) {
+        System.out.print(pergunta + " (Digite 'S' para especificar ou 'N' se não tiver preferência): ");
+        String resposta = scanner.nextLine().toUpperCase();
+
+        if (resposta.equals("S")) {
+            System.out.print("Especifique: ");
+            return scanner.nextLine();
+        } else {
+            return "N"; //indica que a pessoa não tem preferencia no que foi perguntado
         }
     }
 
