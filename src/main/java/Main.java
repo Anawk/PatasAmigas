@@ -1,11 +1,15 @@
-import entity.*;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import entity.Adotante;
+import entity.Animal;
+import entity.Funcionario;
+import entity.PreferenciasAdocao;
+import entity.Tutor;
 
 public class Main {
 
@@ -49,7 +53,6 @@ public class Main {
                 case 2:
                     Tutor tutor = criarTutor(scanner);
                     tutores.add(tutor);
-                    System.out.println(tutores);
                     break;
                 case 3:
                     Adotante adotante = criarAdotante(scanner);
