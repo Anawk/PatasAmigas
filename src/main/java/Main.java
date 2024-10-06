@@ -105,8 +105,13 @@ public class Main {
         String pais = scanner.nextLine();
         System.out.print("Nacionalidade: ");
         String nacionalidade = scanner.nextLine();
-        System.out.print("Número de Identificação: ");
-        String numeroIdentificacao = scanner.nextLine();
+        System.out.print("CPF: ");
+        String cpf = scanner.nextLine();
+        System.out.print("Gênero: ");
+        String genero = scanner.nextLine();
+        LocalDate dataNascimento = verificaData(scanner, "Data de Nascimento (yyyy-MM-dd): ");
+        System.out.print("Senha: ");
+        String senha = scanner.nextLine();
         LocalDate dataContratacao = verificaData(scanner, "Data de Contratação (yyyy-MM-dd): ");
         System.out.print("Cargo: ");
         String cargo = scanner.nextLine();
@@ -115,11 +120,15 @@ public class Main {
         scanner.nextLine();
         System.out.print("Departamento: ");
         String departamento = scanner.nextLine();
-        System.out.println("--- Funcionário Registrado! ---");
 
-        return new Funcionario(nextId++, nome, sobrenome, email, logradouro, numero, bairro, cidade, estado, pais, nacionalidade,
-                numeroIdentificacao, dataContratacao, cargo, salario, departamento);
+        Funcionario funcionario = new Funcionario(nome, sobrenome, email, logradouro, numero, bairro, cidade, estado,
+                pais, nacionalidade, cpf, genero, dataNascimento, senha, dataContratacao, cargo, salario, departamento);
+
+        System.out.println("--- Funcionário " + funcionario.getNumeroIdentificacaoFuncionario() + " registrado! ---");
+
+        return funcionario;
     }
+
 
     private static Tutor criarTutor(Scanner scanner) {
         System.out.println("\n--- Registro do Novo Tutor ---");
@@ -143,16 +152,23 @@ public class Main {
         String pais = scanner.nextLine();
         System.out.print("Nacionalidade: ");
         String nacionalidade = scanner.nextLine();
-        System.out.print("Número de Identificação: ");
-        String numeroIdentificacao = scanner.nextLine();
+        System.out.print("CPF: ");
+        String cpf = scanner.nextLine();
+        System.out.print("Gênero: ");
+        String genero = scanner.nextLine();
+        LocalDate dataNascimento = verificaData(scanner, "Data de Nascimento (yyyy-MM-dd): ");
         System.out.print("Número de Animais sob Custódia: ");
         int numeroAnimaisSobCustodia = scanner.nextInt();
         scanner.nextLine();
-        System.out.println("--- Tutor Registrado! ---");
 
         List<String> historicoAdocoes = new ArrayList<>();
-        return new Tutor(nextId++, nome, sobrenome, email, logradouro, numero, bairro, cidade, estado, pais, nacionalidade,
-                numeroIdentificacao, numeroAnimaisSobCustodia, historicoAdocoes);
+
+        Tutor tutor = new Tutor(nome, sobrenome, email, logradouro, numero, bairro, cidade, estado,
+                pais, nacionalidade, cpf, genero, dataNascimento,numeroAnimaisSobCustodia,historicoAdocoes);
+
+        System.out.println("--- Tutor " + tutor.getNumeroIdentificacao() + " registrado! ---");
+
+        return tutor;
     }
 
     private static Adotante criarAdotante(Scanner scanner) {
@@ -177,8 +193,11 @@ public class Main {
         String pais = scanner.nextLine();
         System.out.print("Nacionalidade: ");
         String nacionalidade = scanner.nextLine();
-        System.out.print("Número de Identificação: ");
-        String numeroIdentificacao = scanner.nextLine();
+        System.out.print("CPF: ");
+        String cpf = scanner.nextLine();
+        System.out.print("Gênero: ");
+        String genero = scanner.nextLine();
+        LocalDate dataNascimento = verificaData(scanner, "Data de Nascimento (yyyy-MM-dd): ");
 
         PreferenciasAdocao preferenciasAdocao = new PreferenciasAdocao("N", "N", 0, 0, "N");
 
@@ -216,11 +235,14 @@ public class Main {
             preferenciasAdocao = new PreferenciasAdocao(especie, raca, idadeMinima, idadeMaxima, sexo);
         }
 
-        System.out.println("--- Adotante Registrado! ---");
-
         List<String> historicoAdocoes = new ArrayList<>();
-        return new Adotante(nextId++, nome, sobrenome, email, logradouro, numero, bairro, cidade, estado, pais, nacionalidade,
-                numeroIdentificacao, preferenciasAdocao, historicoAdocoes);
+
+        Adotante adotante = new Adotante(nextId++,nome, sobrenome, email, logradouro, numero, bairro, cidade, estado,
+                pais, nacionalidade, cpf, genero, dataNascimento, preferenciasAdocao, historicoAdocoes);
+
+        System.out.println("--- Adotante " + adotante.getNumeroIdentificacao() + " registrado! ---");
+
+        return adotante;
     }
 
     private static Animal cadastrarAnimal(Scanner scanner) {
@@ -294,7 +316,7 @@ public class Main {
         int size = funcionarios.size();
         System.out.println("Lista de Funcionários: ");
         System.out.println(size);// tamanho da lista
-        System.out.println(funcionarios.isEmpty()); //true = lista vazia | false = lista com funcionarios
+        //System.out.println(funcionarios.isEmpty()); //true = lista vazia | false = lista com funcionarios
         int indice = 1;
         if (funcionarios.isEmpty()) {
             System.out.println("Sem funcionários cadastrados!");
@@ -311,7 +333,7 @@ public class Main {
         int size = tutores.size();
         System.out.println("Lista de Tutores: ");
         System.out.println(size);// tamanho da lista
-        System.out.println(tutores.isEmpty()); //true = lista vazia | false = lista com funcionarios
+        //System.out.println(tutores.isEmpty()); //true = lista vazia | false = lista com funcionarios
         int indice = 1;
         if (tutores.isEmpty()) {
             System.out.println("Sem tutores cadastrados!");
@@ -345,7 +367,7 @@ public class Main {
         int size = animais.size();
         System.out.println("Lista de Animais: ");
         System.out.println(size);// tamanho da lista
-        System.out.println(animais.isEmpty()); //true = lista vazia | false = lista com funcionarios
+        //System.out.println(animais.isEmpty()); //true = lista vazia | false = lista com funcionarios
         int indice = 1;
         if (animais.isEmpty()) {
             System.out.println("Sem animais cadastrados!");

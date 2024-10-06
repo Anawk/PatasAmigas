@@ -24,11 +24,11 @@ public class Pessoa {
     private static final Argon2 argon2 = Argon2Factory.create();
 
 
-    public Pessoa(int idPessoa, String nome, String sobrenome, String email, String logradouro, String numero, String bairro, String cidade, String estado, String pais, String nacionalidade) {}
+    public Pessoa() {}
 
     public Pessoa(int idPessoa, String nome, String sobrenome, String email, String logradouro,
                   String numero, String bairro, String cidade, String estado, String pais,
-                  String nacionalidade, String cpf, String genero, LocalDate dataNascimento, String senha) {
+                  String nacionalidade, String cpf, String genero, LocalDate dataNascimento) {
         this.idPessoa = idPessoa;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -43,7 +43,6 @@ public class Pessoa {
         this.cpf = cpf;
         this.genero = genero;
         this.dataNascimento = dataNascimento;
-        setSenha(senha);
     }
 
 

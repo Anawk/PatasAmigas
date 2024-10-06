@@ -11,28 +11,24 @@ public class Funcionario extends Pessoa {
     private String cargo;
     private double salario;
     private String departamento;
-    private int idFuncionario;  
+    private int idFuncionario;
+    private String senha;
 
     public Funcionario(String nome, String sobrenome, String email, String logradouro, String numero, String bairro,
                        String cidade, String estado, String pais, String nacionalidade, String cpf, String genero,
-                       LocalDate dataNascimento, String senha, LocalDate dataContratacao, String cargo,
-                       double salario, String departamento) {
-        super(0, nome, sobrenome, email, logradouro, numero, bairro, cidade, estado, pais, nacionalidade, cpf, genero, dataNascimento, senha);
-        this.idFuncionario = contadorId++;
-        this.numeroIdentificacaoFuncionario = gerarNumeroIdentificacao(); 
+                       LocalDate dataNascimento, String senha, LocalDate dataContratacao,
+                       String cargo, double salario, String departamento) {
+        super(contadorId++, nome, sobrenome, email, logradouro, numero, bairro, cidade, estado, pais, nacionalidade, cpf, genero, dataNascimento);
+        this.idFuncionario = ++contadorId;
+        this.numeroIdentificacaoFuncionario = "F" + String.format("%03d", contadorId++);
         this.dataContratacao = dataContratacao;
         this.cargo = cargo;
         this.salario = salario;
         this.departamento = departamento;
+        this.departamento = departamento;
     }
 
-    private String gerarNumeroIdentificacao() {
-        return "FUNC-" + idFuncionario; 
-    }
 
-    public int getIdFuncionario() {
-        return idFuncionario;
-    }
 
     public String getNumeroIdentificacaoFuncionario() {
         return numeroIdentificacaoFuncionario;
@@ -97,4 +93,5 @@ public class Funcionario extends Pessoa {
     public int hashCode() {
         return Objects.hash(super.hashCode(), numeroIdentificacaoFuncionario, dataContratacao, cargo, salario, departamento);
     }
+
 }
